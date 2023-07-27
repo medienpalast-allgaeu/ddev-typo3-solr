@@ -1,0 +1,40 @@
+#ddev-generated
+services:
+  solr:
+    # Name of container using standard ddev convention
+    container_name: ddev-${DDEV_SITENAME}-solr
+    # The solr docker image is at https://hub.docker.com/_/solr/
+    # and code at https://github.com/docker-solr/docker-solr
+    # README: https://github.com/docker-solr/docker-solr/blob/master/README.md
+    # It's almost impossible to work with it if you don't read the docs there
+    image: solr:8
+    restart: "no"
+    # Solr is served from this port inside the container.
+    ports: []
+    # These labels ensure this service is discoverable by ddev.
+    labels:
+      com.ddev.site-name: ${DDEV_SITENAME}
+      com.ddev.approot: $DDEV_APPROOT
+    environment:
+      # This defines the host name the service should be accessible from. This
+      # will be sitename.ddev.site.
+      - VIRTUAL_HOST=$DDEV_HOSTNAME
+      # This defines the port the service should be accessible from at
+      # sitename.ddev.site.
+      - HTTP_EXPOSE=8983:8983
+      #- HTTPS_EXPOSE=8984:8983
+    volumes:
+      # This mounts the conf in .ddev/solr into the container where
+      # the solr-precreate command in the entrypoint uses it as a one-time
+      # configuration to copy config into the newly-created core. It is not
+      # used if the core has previously been created.
+      - solr:/var/solr
+      - ./solr:/var/solr/data
+
+      - ".:/mnt/ddev_config"
+    external_links:
+      - "ddev-router:${DDEV_SITENAME}.${DDEV_TLD}"
+
+volumes:
+  solr:
+    name: "${DDEV_SITENAME}-solr"
