@@ -17,7 +17,8 @@ depencencies:
 post_install_actions:
 - |
   #ddev-description:include config.solr.yaml in .gitignore
-  echo -n -e "\n!config.solr.yaml" >> .gitignore
+  echo "" >> .gitignore
+  echo "!config.solr.yaml" >> .gitignore
 
 removal_actions:
 
