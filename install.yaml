@@ -5,7 +5,10 @@ pre_install_actions:
 project_files:
 - docker-compose.solr.yaml
 - config.solr.yaml
-- solr/
+- solr/solr.xml
+- solr/zoo.cfg
+- solr/configsets/.gitkeep
+- solr/cores/.gitkeep
 
 global_files:
 
@@ -14,7 +17,7 @@ depencencies:
 post_install_actions:
 - |
   #ddev-description:include config.solr.yaml in .gitignore
-  echo "!config.solr.yaml" > .gitignore
+  echo "!config.solr.yaml" >> .gitignore
 
 removal_actions:
 

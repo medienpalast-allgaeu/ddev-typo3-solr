@@ -1,3 +1,4 @@
+#ddev-generated
 hooks:
     pre-start:
         - exec-host: if [ ! -d ".ddev/solr/data" ]; then mkdir .ddev/solr/data ; chmod 777 .ddev/solr/data ; fi
