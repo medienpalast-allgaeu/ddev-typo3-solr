@@ -28,8 +28,13 @@ services:
       # the solr-precreate command in the entrypoint uses it as a one-time
       # configuration to copy config into the newly-created core. It is not
       # used if the core has previously been created.
+
+      # solr >= 8
       - solr:/var/solr
       - ./solr:/var/solr/data
+
+      # solr < 8
+      #- ./solr:/opt/solr/server/solr
 
       - ".:/mnt/ddev_config"
     external_links:
