@@ -7,7 +7,7 @@ services:
     # and code at https://github.com/docker-solr/docker-solr
     # README: https://github.com/docker-solr/docker-solr/blob/master/README.md
     # It's almost impossible to work with it if you don't read the docs there
-    image: solr:9
+    image: solr:10
     restart: "no"
     # Solr is served from this port inside the container.
     ports: []
@@ -39,6 +39,7 @@ services:
       - ".:/mnt/ddev_config"
     external_links:
       - "ddev-router:${DDEV_SITENAME}.${DDEV_TLD}"
+    command: ["solr-foreground", "--user-managed"]
 
 volumes:
   solr:
